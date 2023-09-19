@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native'
+import { useIsFocused } from '@react-navigation/native'
 
 import { authAxios } from 'src/axios'
 import { Spinner } from 'src/components'
@@ -9,6 +10,7 @@ import { MyBooksTypes } from 'src/types'
 import { ListMyBooks } from './list-my-books'
 
 export const MyBooks = () => {
+  const isFocused = useIsFocused()
   const [isLoading, setIsLoading] = useState(false)
   const [myBooks, setMyBooks] = useState<MyBooksTypes>()
 
@@ -31,7 +33,7 @@ export const MyBooks = () => {
 
   useEffect(() => {
     getMyBooks()
-  }, [])
+  }, [isFocused])
 
   if (isLoading) {
     return <Spinner />
